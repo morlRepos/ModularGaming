@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+ <head>
+  <meta charset="UTF-8"/>
+  <title>ModularGaming_Container Prototype</title>
+  <link rel="icon" type="image/x-icon" href=".././Images/brain.ico">
+  <meta name="description" content="Standalone game components made with JS/HTML/and CSS. For Pixel Indie Gaming"/>
+  <meta name="keywords" content="HTML, CSS, JavaScript, Modular Coding, Game Template"/>
+  <meta name="author" content="M.ORL"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <style>
+   *{
+     box-sizing:border-box;
+     margin:0;
+   }
+   html{
+     font-family: monospace;
+     font-size:16pt;
+   }
+   html,body{
+     width:100%;
+     height:100%;
+     overflow:hidden;
+   }
+   .canvas-radial-gradient {
+     background: radial-gradient(farthest-corner,#000000, #1e1e1e);
+   }
+   #Container{
+    background: #1e1e1e;
+    margin:1rem;
+    width:calc(100% - 2rem);
+    height:calc(100% - 2rem);
+    color: whitesmoke;
+    position:absolute;
+    top:0;
+    left:0;
+   }
+   #Container img {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+   }
+  </style>
+  <style>
+   #SampleWidget{
+    text-align: center;
+    position: relative;
+    top: 50%;
+   }
+  </style>
+  <style>
+   p{
+     white-space: nowrap;
+     overflow: hidden;
+     opacity: 1;
+     animation: 2s infinite alternate fadeEffect;
+   }
+  .show{
+    opacity:1;
+    animation: fadeEffect 2s steps(60, end);
+
+    background:brown;
+    color:#0a0a0a;
+    font-weight:800;
+    font-size:large;
+    border: 0.1rem solid red;
+    margin-top:1rem;
+  }
+  button[class="show"]:hover{
+    color:coral;
+    background:#220808;
+    border-color:#afafaf;
+  }
+  @keyframes fadeEffect{ 
+     from { opacity: 0; } 
+  } 
+  .paused {
+    animation-play-state: paused;
+  }
+  .lastRun {
+    animation-iteration-count:1;
+  }
+  </style>
+  <script>
+    var intro;
+    var messages = [
+	"Thank you for your patience.",
+	"ETA to completion TBD.",
+	"The developer is working on more widgets.",
+	"Nothing fancy this first time around.",
+	"Welcome, please wait while we get things set up.",
+	"Hello."
+    ];
+    function updateMessage(){ 
+	console.log("startMessageLog");
+	if((nextMessage = messages.pop()) != undefined){
+	  console.log(nextMessage);
+	  document.getElementById("SampleWidget").children[0].innerText = nextMessage;
+		if(messages.length == 1){
+		  document.getElementById("SampleWidget").children[0].classList.toggle("lastRun");
+		  setTimeout(function(){
+		    /*DOSTUFF.*/
+		    addStartButton("SampleWidget");
+		  },4000+1000);
+		}
+	}
+	else{ 
+	  clearInterval(intro); 
+	  //setTimeout(function(){document.getElementById("SampleWidget").children[0].classList.toggle("paused");},1000); 
+	}
+    }
+    function addStartButton(id){
+      var button = document.createElement("BUTTON");
+      button.type = "button";
+      button.innerText = "Preview Widgets";
+      button.classList.add("show");
+      document.getElementById(id).append(button);
+    }
+    window.onload = function(){
+	console.log("ready");
+	setTimeout(function(){ intro = setInterval(updateMessage,4000); },4000);
+    }
+  </script>
+ </head>
+ <body class="canvas-radial-gradient">
+  <div id="Container">
+   <div id="SampleWidget"><p>...</p></div>
+   <noscript>Javascript Disabled.</noscript>
+  </div>
+ </body>
+</html>
