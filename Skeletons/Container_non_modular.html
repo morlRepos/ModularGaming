@@ -80,6 +80,17 @@
   .lastRun {
     animation-iteration-count:1;
   }
+  @media only screen and (max-width: 600px) {
+    .show{
+        position:absolute;
+        transform: translateX(-50%);
+    }
+    #SampleWidget {
+	margin: auto 2rem;
+	transform: translateY(-50%);
+	}
+    #SampleWidget > p { white-space:initial;overflow:visible; }
+  }	  
   </style>
   <script>
     var intro;
