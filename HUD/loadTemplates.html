@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<template id="single-dialogue-intro-template">
+    <style>
+        #SampleWidget {
+            text-align: center;
+            position: relative;
+            top: 50%;
+        }
+
+        p {
+            white-space: nowrap;
+            overflow: hidden;
+            opacity: 1;
+            animation: 2s infinite alternate fadeEffect;
+        }
+
+        .show {
+            opacity: 1;
+            animation: fadeEffect 2s steps(60, end);
+
+            background: brown;
+            color: #0a0a0a;
+            font-weight: 800;
+            font-size: large;
+            border: 0.1rem solid red;
+            margin-top: 1rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button[class="show"]:hover {
+            color: coral;
+            background: #220808;
+            border-color: #afafaf;
+        }
+
+        @keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+        }
+
+        .paused {
+            animation-play-state: paused;
+        }
+
+        .lastRun {
+            animation-iteration-count: 1;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #SampleWidget .show {
+                position: fixed;
+                display: inline-block;
+                transform: translateX(-50%);
+            }
+            #SampleWidget {
+                display: inline-block;
+                margin: auto 2rem;
+                width: calc(100% - 4rem);
+                transform: translateY(-50%);
+            }
+            #SampleWidget>p {
+                white-space: initial;
+                overflow: visible;
+            }
+        }
+    </style>
+    <script>
+        var intro;
+        var messages = ["ox_xo", "oops no message set"];
+        function updateMessage() {
+            console.log("startMessageLog");
+            if ((nextMessage = messages.pop()) != undefined) {
+                console.log(nextMessage);
+                //document.getElementById("SampleWidget").children[0].innerText = nextMessage;
+                document.getElementById("introDialogue_T0").innerText = nextMessage;
+                if (messages.length == 1) {
+                    //document.getElementById("SampleWidget").children[0].classList.toggle("lastRun");
+                    document.getElementById("introDialogue_T0").classList.toggle("lastRun");
+                    setTimeout(function () {
+                        /*DOSTUFF.*/
+                        addStartButton("SampleWidget");
+                    }, 4000 + 1000);
+                }
+            }
+            else {
+                clearInterval(intro);
+            }
+        }
+        function addStartButton(id) {
+            var button = document.createElement("BUTTON");
+            button.type = "button";
+            button.innerText = "Preview Widgets";
+            button.classList.add("show");
+            document.getElementById(id).append(button);
+        }
+
+        function getMessagesIfAny(id) {
+            console.log("Checking if it has messages now..");
+            if(document.getElementById(id).attributes.messages != undefined){
+                messages = document.getElementById(id).attributes.messages;
+            }
+        }
+    </script>
+    <p id="introDialogue_T0">...</p>
+</template>

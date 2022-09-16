@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ModularGaming_Container Prototype</title>
+  <link rel="icon" type="image/x-icon" href="./Images/brain.ico">
+  <meta name="description" content="Standalone game components made with JS/HTML/and CSS. For Pixel Indie Gaming" />
+  <meta name="keywords" content="HTML, CSS, JavaScript, Modular Coding, Game Template" />
+  <meta name="author" content="M.ORL" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    html {
+      font-family: monospace;
+      font-size: 16pt;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .canvas-radial-gradient {
+      background: radial-gradient(farthest-corner, #000000, #1e1e1e);
+    }
+
+    #Container {
+      background: #1e1e1e;
+      margin: 1rem;
+      width: calc(100% - 2rem);
+      height: calc(100% - 2rem);
+      color: whitesmoke;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #Container img {
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+    }
+  </style>
+</head>
+
+<body class="canvas-radial-gradient">
+  <div id="Container">
+    <!--<div id="SampleWidget"><p>...</p></div>-->
+    <!--<single-dialogue-intro id="SampleWidget"></single-dialogue-intro>-->
+    <noscript>
+      <div style="text-align: center;position:absolute;top:50%;left:50%;transform: translateY(-50%) translateX(-50%);">Javascript Disabled.</div>
+    </noscript>
+  </div>
+
+  <!--Iframe that holds all templates in it's body below..with the JS loader to handle other needed logic.-->
+  <!--lets see how this goes for now, might change it in the future as this develops.-->
+  <iframe src="about:blank" id="allTheTemplates" style="display:none;" sandbox="allow-same-origin"></iframe>
+  <script src="./HUD/loadWidgets.js" type="text/javascript"></script>
+  <script>
+    document.getElementById("allTheTemplates").src = "./HUD/loadTemplates.html";
+    window.onload = function () {
+      initialize();
+    }
+  </script>
+</body>
+
+</html>
