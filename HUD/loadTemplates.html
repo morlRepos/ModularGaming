@@ -68,41 +68,24 @@
         }
     </style>
     <script>
-        var intro;
-        var messages = ["ox_xo", "oops no message set"];
-        function updateMessage() {
-            console.log("startMessageLog");
-            if ((nextMessage = messages.pop()) != undefined) {
-                console.log(nextMessage);
-                //document.getElementById("SampleWidget").children[0].innerText = nextMessage;
-                document.getElementById("introDialogue_T0").innerText = nextMessage;
-                if (messages.length == 1) {
-                    //document.getElementById("SampleWidget").children[0].classList.toggle("lastRun");
-                    document.getElementById("introDialogue_T0").classList.toggle("lastRun");
-                    setTimeout(function () {
-                        /*DOSTUFF.*/
-                        addStartButton("SampleWidget");
-                    }, 4000 + 1000);
-                }
-            }
-            else {
-                clearInterval(intro);
-            }
-        }
-        function addStartButton(id) {
-            var button = document.createElement("BUTTON");
-            button.type = "button";
-            button.innerText = "Preview Widgets";
-            button.classList.add("show");
-            document.getElementById(id).append(button);
-        }
+        
+    </script>
+    <script type="module"> 
+    
+        import("./HUD/SingleDialogueintro.js").then((module) => { 
+                console.log(module.isAlive);
+                globalThis.single_dialogue_intro_module = module;
 
-        function getMessagesIfAny(id) {
-            console.log("Checking if it has messages now..");
-            if(document.getElementById(id).attributes.messages != undefined){
-                messages = document.getElementById(id).attributes.messages;
-            }
-        }
+            }).catch((err) => {
+                console.log(err.message);
+            });
+        
     </script>
     <p id="introDialogue_T0">...</p>
 </template>
+
+<!--ADDANOTHER TEMPLATE HERE-->
+
+<!--ADDANOTHER TEMPLATE HERE-->
+
+<!--ADDANOTHER TEMPLATE HERE-->
